@@ -12,12 +12,14 @@ export default function HomePage() {
   const loginWithFacebook = async () => {
     try {
       setLoading(true);
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
 
-      // After login, redirect to profile or dashboard
-      // For simplicity, always go to profile first
-      router.push("/profile");
+      if (isMobile) {
+        await signInWithRedirect(auth, provider);
+      } else {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        router.push("/profile");
+      }
     } catch (err) {
       console.error("Login error:", err);
       setLoading(false);
