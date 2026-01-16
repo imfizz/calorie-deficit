@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 export default function HomePage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const isMobile = typeof window !== "undefined" && /Mobi|Android/i.test(window.navigator.userAgent);
+
 
   const loginWithFacebook = async () => {
     try {
